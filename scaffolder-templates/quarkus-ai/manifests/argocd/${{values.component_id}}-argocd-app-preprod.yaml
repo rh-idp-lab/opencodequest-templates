@@ -6,6 +6,8 @@ metadata:
   namespace: rhdh-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  labels:
+    argocd.argoproj.io/instance=${{values.user}}-${{values.component_id}}-bootstrap
 spec:
   project: default
   source:
