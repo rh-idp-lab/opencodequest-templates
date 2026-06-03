@@ -126,20 +126,20 @@ spec:
           component_id: "${{ '{{' }} parameters.component_id | lower {{ '}}' }}"
           class_name: "${{ '{{' }} parameters.component_id | replace('_', ' ') | title | replace(' ', '') {{ '}}' }}"
           description: "${{ '{{' }} parameters.description {{ '}}' }}"
-          namespace: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}-workshop-dev"
+          namespace: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}-workshop-dev"
           group_id: "${{ '{{' }} parameters.group_id {{ '}}' }}"
           artifact_id: "${{ '{{' }} parameters.component_id | lower {{ '}}' }}-service"
           java_package_name: "io.quarkus.workshop.${{ '{{' }} parameters.component_id | lower {{ '}}' }}"
           java_package_name_dir: "io/quarkus/workshop/${{ '{{' }} parameters.component_id | lower {{ '}}' }}"
           cluster: ".${{ '{{' }} parameters.openshiftCluster {{ '}}' }}"
           host: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}"
-          destination: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}"
-          quay_destination: "${{ '{{' }} parameters.image_organization{{ '}}' }}/${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}-${{ '{{' }} parameters.component_id {{ '}}' }}"
+          destination: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}"
+          quay_destination: "${{ '{{' }} parameters.image_organization{{ '}}' }}/${{ '{{' }} user.entity.metadata.name {{ '}}' }}-${{ '{{' }} parameters.component_id {{ '}}' }}"
           port: 8080
           verify_commits: "${{ '{{' }} parameters.repo.verify_commits {{ '}}' }}"
           system: "${{ '{{' }} parameters.system {{ '}}' }}"
-          owner: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}"
-          user: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}"
+          owner: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}"
+          user: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}"
 
 
 # ------ Gitlab Steps
@@ -148,7 +148,7 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}?owner=${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}&repo=${{ '{{' }} parameters.component_id {{ '}}' }}"
+        repoUrl: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}?owner=${{ '{{' }} user.entity.metadata.name {{ '}}' }}&repo=${{ '{{' }} parameters.component_id {{ '}}' }}"
         repoVisibility: public
 
 
@@ -170,12 +170,12 @@ spec:
         values:
           component_id: "${{ '{{' }} parameters.component_id {{ '}}' }}"
           description: "${{ '{{' }} parameters.description {{ '}}' }}"
-          destination: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}-gitops.git"
-          source_repository: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}.git"
+          destination: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.metadata.name {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}-gitops.git"
+          source_repository: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.metadata.name {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}.git"
           repository_name: "${{ '{{' }} parameters.component_id {{ '}}' }}"
-          git_owner: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}"
+          git_owner: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}"
           cluster: ".${{ '{{' }} parameters.openshiftCluster {{ '}}' }}"
-          namespace: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}-workshop-dev"
+          namespace: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}-workshop-dev"
           image_registry: "${{ '{{' }} parameters.image_registry {{ '}}' }}"
           image_host: "${{ '{{' }} parameters.image_host {{ '}}' }}"
           image_organization: "${{ '{{' }} parameters.image_organization {{ '}}' }}"
@@ -185,7 +185,7 @@ spec:
           repository_host: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}"
           deployment_name: "${{ '{{' }} parameters.component_id {{ '}}' }}"
           # user: "${{ '{{' }} parameters.owner_group | parseEntityRef | pick('name') {{ '}}' }}"
-          user: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}"
+          user: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}"
           verify_commits: "${{ '{{' }} parameters.repo.verify_commits {{ '}}' }}"
           stackrox_endpoint: "${{ '{{' }} parameters.stackrox_endpoint {{ '}}' }}"
         targetPath: ./tenant-gitops
@@ -197,7 +197,7 @@ spec:
       name: Publishing to Resource Repository
       action: publish:gitlab
       input:
-        repoUrl: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}?owner=${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}&repo=${{ '{{' }} parameters.component_id {{ '}}' }}-gitops"
+        repoUrl: "${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}?owner=${{ '{{' }} user.entity.metadata.name {{ '}}' }}&repo=${{ '{{' }} parameters.component_id {{ '}}' }}-gitops"
         title: "gitops resources for ${{ '{{' }} parameters.component_id {{ '}}' }}"
         description: "gitops resources for ${{ '{{' }} parameters.component_id {{ '}}' }}"
         sourcePath: ./tenant-gitops
@@ -212,10 +212,10 @@ spec:
       name: Create ArgoCD Resources
       action: argocd:create-resources
       input:
-        appName: "${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}-${{ '{{' }} parameters.component_id {{ '}}' }}-bootstrap"
+        appName: "${{ '{{' }} user.entity.metadata.name {{ '}}' }}-${{ '{{' }} parameters.component_id {{ '}}' }}-bootstrap"
         argoInstance: main
         namespace: rhdh-gitops
-        repoUrl: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.spec.memberOf[0] {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}-gitops.git"
+        repoUrl: "https://${{ '{{' }} parameters.repo.host {{ '}}' }}.${{ '{{' }} parameters.openshiftCluster {{ '}}' }}/${{ '{{' }} user.entity.metadata.name {{ '}}' }}/${{ '{{' }} parameters.component_id {{ '}}' }}-gitops.git"
         path: 'argocd/'
 
   output:
