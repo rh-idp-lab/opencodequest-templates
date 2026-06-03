@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: "opencodequest"
+  description: "Everything related Open Code Quest Workshop"
+spec:
+  owner: "group:default/users"
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: "opencodequest"
+  description: "Open Code Quest applications"
+  tags:
+    - opencodequest
+    - workshop
+    - redhat
+spec:
+  owner: "group:default/users"
+  domain: "opencodequest"
