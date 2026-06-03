@@ -11,7 +11,7 @@ metadata:
     - spring-boot
     - opencodequest
 spec:
-  owner: {{ group }}
+  owner: rhdh
   type: service
   parameters:
   # -- update title below ---- 

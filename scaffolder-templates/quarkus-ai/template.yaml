@@ -12,7 +12,7 @@ metadata:
     - ai
     - intelligent
 spec:
-  owner: {{ group }}
+  owner: rhdh
   type: service
   parameters:
   # -- update title below ---- 

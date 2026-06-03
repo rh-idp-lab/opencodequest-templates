@@ -10,7 +10,7 @@ metadata:
     - quarkus
     - opencodequest
 spec:
-  owner: {{ group }}
+  owner: rhdh
   type: service
   parameters:
   # -- update title below ---- 
