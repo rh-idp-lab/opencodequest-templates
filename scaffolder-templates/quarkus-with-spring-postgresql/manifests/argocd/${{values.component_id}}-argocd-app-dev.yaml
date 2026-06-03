@@ -17,14 +17,14 @@ spec:
     helm:
       parameters:
       - name: namespace.name
-        value: ${{values.user}}-workshop-dev
+        value: workshop-dev
       - name: environment
         value: dev
       - name: image.tag
         value: latest
   destination:
     server: https://kubernetes.default.svc
-    namespace: ${{values.user}}-workshop-dev
+    namespace: workshop-dev
   ignoreDifferences:
     - group: '*'
       jqPathExpressions:

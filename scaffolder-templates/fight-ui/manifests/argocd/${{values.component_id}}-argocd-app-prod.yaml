@@ -17,12 +17,12 @@ spec:
     helm:
       parameters:
       - name: namespace.name
-        value: ${{values.user}}-workshop-preprod
+        value: workshop-preprod
       - name: environment
         value: prod
   destination:
     server: https://kubernetes.default.svc
-    namespace: ${{values.user}}-workshop-prod
+    namespace: workshop-prod
   syncPolicy:
     automated:
       prune: true

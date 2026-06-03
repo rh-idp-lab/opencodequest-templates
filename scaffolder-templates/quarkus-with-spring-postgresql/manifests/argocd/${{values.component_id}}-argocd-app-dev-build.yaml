@@ -18,7 +18,7 @@ spec:
     path: ./helm/build
   destination:
     server: https://kubernetes.default.svc
-    namespace: ${{values.user}}-workshop-dev
+    namespace: workshop-dev
   ignoreDifferences:
     - group: '*'
       jqPathExpressions:

@@ -15,4 +15,4 @@ spec:
     - name: destination-tag
       value: prod-$(body.tag)
     - name: namespace
-      value: {{ .Values.user }}-workshop-prod
+      value: workshop-prod
