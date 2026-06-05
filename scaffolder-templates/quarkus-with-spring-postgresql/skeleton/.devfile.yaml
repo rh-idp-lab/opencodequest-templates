@@ -22,8 +22,8 @@ components:
           value: 0.0.0.0
         - name: MAVEN_OPTS
           value: "-Dmaven.repo.local=/home/user/.m2/repository"
-      memoryLimit: 4Gi
-      cpuLimit: 2500m
+      memoryLimit: 2Gi
+      cpuLimit: 1000m
       volumeMounts:
         - name: m2
           path: /home/user/.m2
